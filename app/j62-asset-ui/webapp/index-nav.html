@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J62 Asset Accounting - Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #0070f2;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .nav-container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #0070f2;
+            border-radius: 4px;
+        }
+        .nav-item a {
+            text-decoration: none;
+            color: #0070f2;
+            font-size: 18px;
+            font-weight: 500;
+            display: block;
+        }
+        .nav-item a:hover {
+            color: #005bb5;
+        }
+        .nav-item p {
+            margin: 5px 0 0 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .process-flow {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f4fd;
+            border-radius: 4px;
+        }
+        .process-flow h2 {
+            color: #0070f2;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .process-flow p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>J62 Asset Accounting System</h1>
+    
+    <div class="nav-container">
+        <div class="nav-item">
+            <a href="index.html">Asset Master</a>
+            <p>Manage fixed assets and their capitalization details</p>
+        </div>
+        
+        <div class="nav-item">
+            <a href="index.html#PurchaseRequisition">Purchase Requisitions</a>
+            <p>Create and manage purchase requisitions for asset procurement</p>
+        </div>
+        
+        <div class="nav-item">
+            <a href="index.html#PurchaseOrder">Purchase Orders</a>
+            <p>Track purchase orders linked to requisitions</p>
+        </div>
+        
+        <div class="nav-item">
+            <a href="index.html#GoodsReceipt">Goods Receipts</a>
+            <p>Record goods receipts for purchased items</p>
+        </div>
+        
+        <div class="nav-item">
+            <a href="index.html#Invoice">Invoices</a>
+            <p>Manage supplier invoices and payment processing</p>
+        </div>
+        
+        <div class="process-flow">
+            <h2>Process Flow</h2>
+            <p>
+                <strong>Asset Master</strong> → linked to → <strong>Purchase Requisition</strong> → 
+                linked to → <strong>Purchase Order</strong> → linked to → <strong>Goods Receipt</strong> → 
+                linked to → <strong>Invoice</strong>
+            </p>
+            <p style="margin-top: 10px;">
+                Each entity in the chain can reference the next entity in the procurement-to-payment process.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
