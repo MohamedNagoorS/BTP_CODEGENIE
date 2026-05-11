@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="J62AssetService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="AssetMaster" EntityType="J62AssetService.AssetMaster">
+          <NavigationPropertyBinding Path="toPurchaseRequisition" Target="PurchaseRequisition"/>
+          <NavigationPropertyBinding Path="SiblingEntity" Target="AssetMaster"/>
+        </EntitySet>
+        <EntitySet Name="PurchaseRequisition" EntityType="J62AssetService.PurchaseRequisition">
+          <NavigationPropertyBinding Path="toPurchaseOrder" Target="PurchaseOrder"/>
+          <NavigationPropertyBinding Path="items" Target="PurchaseRequisitionItem"/>
+          <NavigationPropertyBinding Path="SiblingEntity" Target="PurchaseRequisition"/>
+        </EntitySet>
+        <EntitySet Name="PurchaseRequisitionItem" EntityType="J62AssetService.PurchaseRequisitionItem">
+          <NavigationPropertyBinding Path="parent" Target="PurchaseRequisition"/>
+          <NavigationPropertyBinding Path="SiblingEntity" Target="PurchaseRequisitionItem"/>
+        </EntitySet>
+        <EntitySet Name="PurchaseOrder" EntityType="J62AssetService.PurchaseOrder">
+          <NavigationPropertyBinding Path="toGoodsReceipt" Target="GoodsReceipt"/>
+          <NavigationPropertyBinding Path="items" Target="PurchaseOrderItem"/>
+          <NavigationPropertyBinding Path="SiblingEntity" Target="PurchaseOrder"/>
+        </EntitySet>
+        <EntitySet Name="PurchaseOrderItem" EntityType="J62AssetService.PurchaseOrderItem">
+          <NavigationPropertyBinding Path="parent" Target="PurchaseOrder"/>
+          <NavigationPropertyBinding Path="SiblingEntity" Target="PurchaseOrderItem"/>
+        </EntitySet>
+        <EntitySet Name="GoodsReceipt" EntityType="J62AssetService.GoodsReceipt">
+          <NavigationPropertyBinding Path="toInvoice" Target="Invoice"/>
+          <NavigationPropertyBinding Path="items" Target="GoodsReceiptItem"/>
+          <NavigationPropertyBinding Path="SiblingEntity" Target="GoodsReceipt"/>
+        </EntitySet>
+        <EntitySet Name="GoodsReceiptItem" EntityType="J62AssetService.GoodsReceiptItem">
+          <NavigationPropertyBinding Path="parent" Target="GoodsReceipt"/>
+          <NavigationPropertyBinding Path="SiblingEntity" Target="GoodsReceiptItem"/>
+        </EntitySet>
+        <EntitySet Name="Invoice" EntityType="J62AssetService.Invoice">
+          <NavigationPropertyBinding Path="items" Target="InvoiceItem"/>
+          <NavigationPropertyBinding Path="SiblingEntity" Target="Invoice"/>
+        </EntitySet>
+        <EntitySet Name="InvoiceItem" EntityType="J62AssetService.InvoiceItem">
+          <NavigationPropertyBinding Path="parent" Target="Invoice"/>
+          <NavigationPropertyBinding Path="SiblingEntity" Target="InvoiceItem"/>
+        </EntitySet>
+      </EntityContainer>
+      <EntityType Name="AssetMaster">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="IsActiveEntity"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="AssetClass" Type="Edm.String"/>
+        <Property Name="Description" Type="Edm.String"/>
+        <Property Name="CompanyCode" Type="Edm.String" DefaultValue="1010"/>
+        <Property Name="CostCenter" Type="Edm.String"/>
+        <Property Name="CapitalizedOn" Type="Edm.Date"/>
+        <Property Name="ref_PurchaseRequisitionID" Type="Edm.Guid"/>
+        <NavigationProperty Name="toPurchaseRequisition" Type="J62AssetService.PurchaseRequisition">
+          <ReferentialConstraint Property="ref_PurchaseRequisitionID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <NavigationProperty Name="DraftAdministrativeData" Type="J62AssetService.DraftAdministrativeData" ContainsTarget="true"/>
+        <NavigationProperty Name="SiblingEntity" Type="J62AssetService.AssetMaster"/>
+      </EntityType>
+      <EntityType Name="PurchaseRequisition">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="IsActiveEntity"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="AccountAssignmentCategory" Type="Edm.String" DefaultValue="A"/>
+        <Property Name="ShortText" Type="Edm.String"/>
+        <Property Name="Quantity" Type="Edm.Int32"/>
+        <Property Name="UnitOfMeasure" Type="Edm.String"/>
+        <Property Name="MaterialGroup" Type="Edm.String"/>
+        <Property Name="Plant" Type="Edm.String"/>
+        <Property Name="ValuationPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="ref_PurchaseOrderID" Type="Edm.Guid"/>
+        <NavigationProperty Name="toPurchaseOrder" Type="J62AssetService.PurchaseOrder">
+          <ReferentialConstraint Property="ref_PurchaseOrderID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <NavigationProperty Name="items" Type="Collection(J62AssetService.PurchaseRequisitionItem)" Partner="parent">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <NavigationProperty Name="DraftAdministrativeData" Type="J62AssetService.DraftAdministrativeData" ContainsTarget="true"/>
+        <NavigationProperty Name="SiblingEntity" Type="J62AssetService.PurchaseRequisition"/>
+      </EntityType>
+      <EntityType Name="PurchaseRequisitionItem">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="IsActiveEntity"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="parent" Type="J62AssetService.PurchaseRequisition" Partner="items">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Guid"/>
+        <Property Name="ItemNumber" Type="Edm.Int32"/>
+        <Property Name="Material" Type="Edm.String"/>
+        <Property Name="MaterialDescription" Type="Edm.String"/>
+        <Property Name="Quantity" Type="Edm.Int32"/>
+        <Property Name="UnitOfMeasure" Type="Edm.String"/>
+        <Property Name="UnitPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="TotalAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="DeliveryDate" Type="Edm.Date"/>
+        <Property Name="AccountAssignmentCategory" Type="Edm.String"/>
+        <Property Name="Plant" Type="Edm.String"/>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <NavigationProperty Name="DraftAdministrativeData" Type="J62AssetService.DraftAdministrativeData" ContainsTarget="true"/>
+        <NavigationProperty Name="SiblingEntity" Type="J62AssetService.PurchaseRequisitionItem"/>
+      </EntityType>
+      <EntityType Name="PurchaseOrder">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="IsActiveEntity"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="PurchaseOrderType" Type="Edm.String"/>
+        <Property Name="Supplier" Type="Edm.String"/>
+        <Property Name="OrderQuantity" Type="Edm.Int32"/>
+        <Property Name="NetPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="ref_GoodsReceiptID" Type="Edm.Guid"/>
+        <NavigationProperty Name="toGoodsReceipt" Type="J62AssetService.GoodsReceipt">
+          <ReferentialConstraint Property="ref_GoodsReceiptID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <NavigationProperty Name="items" Type="Collection(J62AssetService.PurchaseOrderItem)" Partner="parent">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <NavigationProperty Name="DraftAdministrativeData" Type="J62AssetService.DraftAdministrativeData" ContainsTarget="true"/>
+        <NavigationProperty Name="SiblingEntity" Type="J62AssetService.PurchaseOrder"/>
+      </EntityType>
+      <EntityType Name="PurchaseOrderItem">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="IsActiveEntity"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="parent" Type="J62AssetService.PurchaseOrder" Partner="items">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Guid"/>
+        <Property Name="ItemNumber" Type="Edm.Int32"/>
+        <Property Name="Material" Type="Edm.String"/>
+        <Property Name="MaterialDescription" Type="Edm.String"/>
+        <Property Name="OrderQuantity" Type="Edm.Int32"/>
+        <Property Name="UnitOfMeasure" Type="Edm.String"/>
+        <Property Name="NetPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="TotalAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="DeliveryDate" Type="Edm.Date"/>
+        <Property Name="Plant" Type="Edm.String"/>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <NavigationProperty Name="DraftAdministrativeData" Type="J62AssetService.DraftAdministrativeData" ContainsTarget="true"/>
+        <NavigationProperty Name="SiblingEntity" Type="J62AssetService.PurchaseOrderItem"/>
+      </EntityType>
+      <EntityType Name="GoodsReceipt">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="IsActiveEntity"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="MaterialDocument" Type="Edm.String"/>
+        <Property Name="PostingDate" Type="Edm.Date"/>
+        <Property Name="ref_InvoiceID" Type="Edm.Guid"/>
+        <NavigationProperty Name="toInvoice" Type="J62AssetService.Invoice">
+          <ReferentialConstraint Property="ref_InvoiceID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <NavigationProperty Name="items" Type="Collection(J62AssetService.GoodsReceiptItem)" Partner="parent">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <NavigationProperty Name="DraftAdministrativeData" Type="J62AssetService.DraftAdministrativeData" ContainsTarget="true"/>
+        <NavigationProperty Name="SiblingEntity" Type="J62AssetService.GoodsReceipt"/>
+      </EntityType>
+      <EntityType Name="GoodsReceiptItem">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="IsActiveEntity"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="parent" Type="J62AssetService.GoodsReceipt" Partner="items">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Guid"/>
+        <Property Name="ItemNumber" Type="Edm.Int32"/>
+        <Property Name="Material" Type="Edm.String"/>
+        <Property Name="MaterialDescription" Type="Edm.String"/>
+        <Property Name="Quantity" Type="Edm.Int32"/>
+        <Property Name="UnitOfMeasure" Type="Edm.String"/>
+        <Property Name="StorageLocation" Type="Edm.String"/>
+        <Property Name="Batch" Type="Edm.String"/>
+        <Property Name="Plant" Type="Edm.String"/>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <NavigationProperty Name="DraftAdministrativeData" Type="J62AssetService.DraftAdministrativeData" ContainsTarget="true"/>
+        <NavigationProperty Name="SiblingEntity" Type="J62AssetService.GoodsReceiptItem"/>
+      </EntityType>
+      <EntityType Name="Invoice">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="IsActiveEntity"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="SupplierInvoiceNumber" Type="Edm.String"/>
+        <Property Name="FiscalYear" Type="Edm.String"/>
+        <Property Name="GrossAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="TaxCode" Type="Edm.String"/>
+        <NavigationProperty Name="items" Type="Collection(J62AssetService.InvoiceItem)" Partner="parent">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <NavigationProperty Name="DraftAdministrativeData" Type="J62AssetService.DraftAdministrativeData" ContainsTarget="true"/>
+        <NavigationProperty Name="SiblingEntity" Type="J62AssetService.Invoice"/>
+      </EntityType>
+      <EntityType Name="InvoiceItem">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="IsActiveEntity"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <NavigationProperty Name="parent" Type="J62AssetService.Invoice" Partner="items">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Guid"/>
+        <Property Name="ItemNumber" Type="Edm.Int32"/>
+        <Property Name="Material" Type="Edm.String"/>
+        <Property Name="MaterialDescription" Type="Edm.String"/>
+        <Property Name="Quantity" Type="Edm.Int32"/>
+        <Property Name="UnitOfMeasure" Type="Edm.String"/>
+        <Property Name="UnitPrice" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="NetAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="TaxAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="GrossAmount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+        <NavigationProperty Name="DraftAdministrativeData" Type="J62AssetService.DraftAdministrativeData" ContainsTarget="true"/>
+        <NavigationProperty Name="SiblingEntity" Type="J62AssetService.InvoiceItem"/>
+      </EntityType>
+      <EntityType Name="DraftAdministrativeData">
+        <Key>
+          <PropertyRef Name="DraftUUID"/>
+        </Key>
+        <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+        <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+        <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+        <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+        <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+      </EntityType>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.AssetMaster"/>
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+        <ReturnType Type="J62AssetService.AssetMaster"/>
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.PurchaseRequisition"/>
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+        <ReturnType Type="J62AssetService.PurchaseRequisition"/>
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.PurchaseRequisitionItem"/>
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+        <ReturnType Type="J62AssetService.PurchaseRequisitionItem"/>
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.PurchaseOrder"/>
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+        <ReturnType Type="J62AssetService.PurchaseOrder"/>
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.PurchaseOrderItem"/>
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+        <ReturnType Type="J62AssetService.PurchaseOrderItem"/>
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.GoodsReceipt"/>
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+        <ReturnType Type="J62AssetService.GoodsReceipt"/>
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.GoodsReceiptItem"/>
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+        <ReturnType Type="J62AssetService.GoodsReceiptItem"/>
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.Invoice"/>
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+        <ReturnType Type="J62AssetService.Invoice"/>
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.InvoiceItem"/>
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+        <ReturnType Type="J62AssetService.InvoiceItem"/>
+      </Action>
+      <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.AssetMaster"/>
+        <ReturnType Type="J62AssetService.AssetMaster"/>
+      </Action>
+      <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.PurchaseRequisition"/>
+        <ReturnType Type="J62AssetService.PurchaseRequisition"/>
+      </Action>
+      <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.PurchaseOrder"/>
+        <ReturnType Type="J62AssetService.PurchaseOrder"/>
+      </Action>
+      <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.GoodsReceipt"/>
+        <ReturnType Type="J62AssetService.GoodsReceipt"/>
+      </Action>
+      <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.Invoice"/>
+        <ReturnType Type="J62AssetService.Invoice"/>
+      </Action>
+      <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.AssetMaster"/>
+        <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+        <ReturnType Type="J62AssetService.AssetMaster"/>
+      </Action>
+      <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.PurchaseRequisition"/>
+        <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+        <ReturnType Type="J62AssetService.PurchaseRequisition"/>
+      </Action>
+      <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.PurchaseOrder"/>
+        <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+        <ReturnType Type="J62AssetService.PurchaseOrder"/>
+      </Action>
+      <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.GoodsReceipt"/>
+        <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+        <ReturnType Type="J62AssetService.GoodsReceipt"/>
+      </Action>
+      <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="J62AssetService.Invoice"/>
+        <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+        <ReturnType Type="J62AssetService.Invoice"/>
+      </Action>
+      <Annotations Target="J62AssetService.EntityContainer/AssetMaster">
+        <Annotation Term="Common.DraftRoot">
+          <Record Type="Common.DraftRootType">
+            <PropertyValue Property="ActivationAction" String="J62AssetService.draftActivate"/>
+            <PropertyValue Property="EditAction" String="J62AssetService.draftEdit"/>
+            <PropertyValue Property="PreparationAction" String="J62AssetService.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="J62AssetService.AssetMaster/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.AssetMaster/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.AssetMaster/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.AssetMaster/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.AssetMaster/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.EntityContainer/PurchaseRequisition">
+        <Annotation Term="Common.DraftRoot">
+          <Record Type="Common.DraftRootType">
+            <PropertyValue Property="ActivationAction" String="J62AssetService.draftActivate"/>
+            <PropertyValue Property="EditAction" String="J62AssetService.draftEdit"/>
+            <PropertyValue Property="PreparationAction" String="J62AssetService.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseRequisition/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseRequisition/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseRequisition/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseRequisition/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseRequisition/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.EntityContainer/PurchaseRequisitionItem">
+        <Annotation Term="Common.DraftNode">
+          <Record Type="Common.DraftNodeType">
+            <PropertyValue Property="PreparationAction" String="J62AssetService.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseRequisitionItem/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseRequisitionItem/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseRequisitionItem/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseRequisitionItem/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseRequisitionItem/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.EntityContainer/PurchaseOrder">
+        <Annotation Term="Common.DraftRoot">
+          <Record Type="Common.DraftRootType">
+            <PropertyValue Property="ActivationAction" String="J62AssetService.draftActivate"/>
+            <PropertyValue Property="EditAction" String="J62AssetService.draftEdit"/>
+            <PropertyValue Property="PreparationAction" String="J62AssetService.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseOrder/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseOrder/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseOrder/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseOrder/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseOrder/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.EntityContainer/PurchaseOrderItem">
+        <Annotation Term="Common.DraftNode">
+          <Record Type="Common.DraftNodeType">
+            <PropertyValue Property="PreparationAction" String="J62AssetService.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseOrderItem/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseOrderItem/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseOrderItem/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseOrderItem/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.PurchaseOrderItem/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.EntityContainer/GoodsReceipt">
+        <Annotation Term="Common.DraftRoot">
+          <Record Type="Common.DraftRootType">
+            <PropertyValue Property="ActivationAction" String="J62AssetService.draftActivate"/>
+            <PropertyValue Property="EditAction" String="J62AssetService.draftEdit"/>
+            <PropertyValue Property="PreparationAction" String="J62AssetService.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="J62AssetService.GoodsReceipt/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.GoodsReceipt/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.GoodsReceipt/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.GoodsReceipt/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.GoodsReceipt/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.EntityContainer/GoodsReceiptItem">
+        <Annotation Term="Common.DraftNode">
+          <Record Type="Common.DraftNodeType">
+            <PropertyValue Property="PreparationAction" String="J62AssetService.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="J62AssetService.GoodsReceiptItem/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.GoodsReceiptItem/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.GoodsReceiptItem/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.GoodsReceiptItem/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.GoodsReceiptItem/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.EntityContainer/Invoice">
+        <Annotation Term="Common.DraftRoot">
+          <Record Type="Common.DraftRootType">
+            <PropertyValue Property="ActivationAction" String="J62AssetService.draftActivate"/>
+            <PropertyValue Property="EditAction" String="J62AssetService.draftEdit"/>
+            <PropertyValue Property="PreparationAction" String="J62AssetService.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="J62AssetService.Invoice/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.Invoice/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.Invoice/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.Invoice/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.Invoice/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.EntityContainer/InvoiceItem">
+        <Annotation Term="Common.DraftNode">
+          <Record Type="Common.DraftNodeType">
+            <PropertyValue Property="PreparationAction" String="J62AssetService.draftPrepare"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="J62AssetService.InvoiceItem/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.InvoiceItem/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.InvoiceItem/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.InvoiceItem/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.InvoiceItem/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.DraftAdministrativeData">
+        <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.DraftAdministrativeData/DraftUUID">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.DraftAdministrativeData/CreationDateTime">
+        <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.DraftAdministrativeData/CreatedByUser">
+        <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.DraftAdministrativeData/DraftIsCreatedByMe">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.DraftAdministrativeData/LastChangeDateTime">
+        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.DraftAdministrativeData/LastChangedByUser">
+        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.DraftAdministrativeData/InProcessByUser">
+        <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
+      </Annotations>
+      <Annotations Target="J62AssetService.DraftAdministrativeData/DraftIsProcessedByMe">
+        <Annotation Term="UI.Hidden" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
