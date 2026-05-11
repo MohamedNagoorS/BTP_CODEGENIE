@@ -5,7 +5,7 @@ service J62AssetService @(path: '/odata/v4/J62AssetService') {
   entity AssetMaster as projection on asset.AssetMaster {
     *,
     toPurchaseRequisition
-  } actions {};
+  };
 
   annotate AssetMaster with @(
     Common.ValueList #ref_PurchaseRequisitionID : {
@@ -29,11 +29,11 @@ service J62AssetService @(path: '/odata/v4/J62AssetService') {
     *,
     toPurchaseOrder,
     items
-  } actions {};
+  };
 
   entity PurchaseRequisitionItem as projection on asset.PurchaseRequisitionItem {
     *
-  } actions {};
+  };
 
   annotate PurchaseRequisition with @(
     Common.ValueList #ref_PurchaseOrderID : {
@@ -57,11 +57,11 @@ service J62AssetService @(path: '/odata/v4/J62AssetService') {
     *,
     toGoodsReceipt,
     items
-  } actions {};
+  };
 
   entity PurchaseOrderItem as projection on asset.PurchaseOrderItem {
     *
-  } actions {};
+  };
 
   annotate PurchaseOrder with @(
     Common.ValueList #ref_GoodsReceiptID : {
@@ -85,11 +85,11 @@ service J62AssetService @(path: '/odata/v4/J62AssetService') {
     *,
     toInvoice,
     items
-  } actions {};
+  };
 
   entity GoodsReceiptItem as projection on asset.GoodsReceiptItem {
     *
-  } actions {};
+  };
 
   annotate GoodsReceipt with @(
     Common.ValueList #ref_InvoiceID : {
@@ -112,9 +112,9 @@ service J62AssetService @(path: '/odata/v4/J62AssetService') {
   entity Invoice as projection on asset.Invoice {
     *,
     items
-  } actions {};
+  };
 
   entity InvoiceItem as projection on asset.InvoiceItem {
     *
-  } actions {};
+  };
 }

@@ -148,11 +148,7 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable",
-                    "creationMode": {
-                      "name": "NewPage",
-                      "createAtEnd": true
-                    }
+                    "type": "ResponsiveTable"
                   }
                 }
               }
@@ -189,11 +185,7 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable",
-                    "creationMode": {
-                      "name": "NewPage",
-                      "createAtEnd": true
-                    }
+                    "type": "ResponsiveTable"
                   }
                 }
               }
@@ -230,11 +222,7 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable",
-                    "creationMode": {
-                      "name": "NewPage",
-                      "createAtEnd": true
-                    }
+                    "type": "ResponsiveTable"
                   }
                 }
               }
@@ -271,11 +259,7 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable",
-                    "creationMode": {
-                      "name": "NewPage",
-                      "createAtEnd": true
-                    }
+                    "type": "ResponsiveTable"
                   }
                 }
               }
@@ -312,11 +296,7 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable",
-                    "creationMode": {
-                      "name": "NewPage",
-                      "createAtEnd": true
-                    }
+                    "type": "ResponsiveTable"
                   }
                 }
               }
