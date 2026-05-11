@@ -148,7 +148,17 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "creationMode": {
+                      "name": "NewPage",
+                      "createAtEnd": true
+                    }
+                  },
+                  "actions": {
+                    "create": {
+                      "enabled": true,
+                      "text": "Create"
+                    }
                   }
                 }
               }
@@ -185,7 +195,17 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "creationMode": {
+                      "name": "NewPage",
+                      "createAtEnd": true
+                    }
+                  },
+                  "actions": {
+                    "create": {
+                      "enabled": true,
+                      "text": "Create"
+                    }
                   }
                 }
               }
@@ -222,7 +242,17 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "creationMode": {
+                      "name": "NewPage",
+                      "createAtEnd": true
+                    }
+                  },
+                  "actions": {
+                    "create": {
+                      "enabled": true,
+                      "text": "Create"
+                    }
                   }
                 }
               }
@@ -259,7 +289,17 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "creationMode": {
+                      "name": "NewPage",
+                      "createAtEnd": true
+                    }
+                  },
+                  "actions": {
+                    "create": {
+                      "enabled": true,
+                      "text": "Create"
+                    }
                   }
                 }
               }
@@ -296,7 +336,17 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "creationMode": {
+                      "name": "NewPage",
+                      "createAtEnd": true
+                    }
+                  },
+                  "actions": {
+                    "create": {
+                      "enabled": true,
+                      "text": "Create"
+                    }
                   }
                 }
               }
