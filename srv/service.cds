@@ -117,4 +117,34 @@ service J62AssetService @(path: '/odata/v4/J62AssetService') {
   entity InvoiceItem as projection on asset.InvoiceItem {
     *
   };
+
+  annotate AssetMaster with @(
+    Capabilities.InsertRestrictions.Insertable : true,
+    Capabilities.UpdateRestrictions.Updatable : true,
+    Capabilities.DeleteRestrictions.Deletable : true
+  );
+
+  annotate PurchaseRequisition with @(
+    Capabilities.InsertRestrictions.Insertable : true,
+    Capabilities.UpdateRestrictions.Updatable : true,
+    Capabilities.DeleteRestrictions.Deletable : true
+  );
+
+  annotate PurchaseOrder with @(
+    Capabilities.InsertRestrictions.Insertable : true,
+    Capabilities.UpdateRestrictions.Updatable : true,
+    Capabilities.DeleteRestrictions.Deletable : true
+  );
+
+  annotate GoodsReceipt with @(
+    Capabilities.InsertRestrictions.Insertable : true,
+    Capabilities.UpdateRestrictions.Updatable : true,
+    Capabilities.DeleteRestrictions.Deletable : true
+  );
+
+  annotate Invoice with @(
+    Capabilities.InsertRestrictions.Insertable : true,
+    Capabilities.UpdateRestrictions.Updatable : true,
+    Capabilities.DeleteRestrictions.Deletable : true
+  );
 }
