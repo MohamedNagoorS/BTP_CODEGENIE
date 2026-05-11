@@ -1,11 +1,6 @@
 using J62AssetService from '../../../../srv/service';
 
 annotate J62AssetService.AssetMaster with @(
-  Capabilities : {
-    InsertRestrictions : {Insertable : true},
-    UpdateRestrictions : {Updatable : true},
-    DeleteRestrictions : {Deletable : true}
-  },
   UI.LineItem : [
     {
       $Type : 'UI.DataField',
@@ -113,11 +108,6 @@ annotate J62AssetService.AssetMaster with @(
 );
 
 annotate J62AssetService.PurchaseRequisition with @(
-  Capabilities : {
-    InsertRestrictions : {Insertable : true},
-    UpdateRestrictions : {Updatable : true},
-    DeleteRestrictions : {Deletable : true}
-  },
   UI.LineItem : [
     {
       $Type : 'UI.DataField',
@@ -236,11 +226,6 @@ annotate J62AssetService.PurchaseRequisition with @(
 );
 
 annotate J62AssetService.PurchaseRequisitionItem with @(
-  Capabilities : {
-    InsertRestrictions : {Insertable : true},
-    UpdateRestrictions : {Updatable : true},
-    DeleteRestrictions : {Deletable : true}
-  },
   UI.LineItem : [
     {
       $Type : 'UI.DataField',
@@ -361,11 +346,6 @@ annotate J62AssetService.PurchaseRequisitionItem with @(
 );
 
 annotate J62AssetService.PurchaseOrder with @(
-  Capabilities : {
-    InsertRestrictions : {Insertable : true},
-    UpdateRestrictions : {Updatable : true},
-    DeleteRestrictions : {Deletable : true}
-  },
   UI.LineItem : [
     {
       $Type : 'UI.DataField',
@@ -468,11 +448,6 @@ annotate J62AssetService.PurchaseOrder with @(
 );
 
 annotate J62AssetService.PurchaseOrderItem with @(
-  Capabilities : {
-    InsertRestrictions : {Insertable : true},
-    UpdateRestrictions : {Updatable : true},
-    DeleteRestrictions : {Deletable : true}
-  },
   UI.LineItem : [
     {
       $Type : 'UI.DataField',
@@ -588,11 +563,6 @@ annotate J62AssetService.PurchaseOrderItem with @(
 );
 
 annotate J62AssetService.GoodsReceipt with @(
-  Capabilities : {
-    InsertRestrictions : {Insertable : true},
-    UpdateRestrictions : {Updatable : true},
-    DeleteRestrictions : {Deletable : true}
-  },
   UI.LineItem : [
     {
       $Type : 'UI.DataField',
@@ -675,11 +645,6 @@ annotate J62AssetService.GoodsReceipt with @(
 );
 
 annotate J62AssetService.GoodsReceiptItem with @(
-  Capabilities : {
-    InsertRestrictions : {Insertable : true},
-    UpdateRestrictions : {Updatable : true},
-    DeleteRestrictions : {Deletable : true}
-  },
   UI.LineItem : [
     {
       $Type : 'UI.DataField',
@@ -790,11 +755,6 @@ annotate J62AssetService.GoodsReceiptItem with @(
 );
 
 annotate J62AssetService.Invoice with @(
-  Capabilities : {
-    InsertRestrictions : {Insertable : true},
-    UpdateRestrictions : {Updatable : true},
-    DeleteRestrictions : {Deletable : true}
-  },
   UI.LineItem : [
     {
       $Type : 'UI.DataField',
