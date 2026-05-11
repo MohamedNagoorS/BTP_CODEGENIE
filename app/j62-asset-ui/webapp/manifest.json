@@ -153,12 +153,6 @@
                       "name": "NewPage",
                       "createAtEnd": true
                     }
-                  },
-                  "actions": {
-                    "create": {
-                      "enabled": true,
-                      "text": "Create"
-                    }
                   }
                 }
               }
@@ -199,12 +193,6 @@
                     "creationMode": {
                       "name": "NewPage",
                       "createAtEnd": true
-                    }
-                  },
-                  "actions": {
-                    "create": {
-                      "enabled": true,
-                      "text": "Create"
                     }
                   }
                 }
@@ -247,12 +235,6 @@
                       "name": "NewPage",
                       "createAtEnd": true
                     }
-                  },
-                  "actions": {
-                    "create": {
-                      "enabled": true,
-                      "text": "Create"
-                    }
                   }
                 }
               }
@@ -294,12 +276,6 @@
                       "name": "NewPage",
                       "createAtEnd": true
                     }
-                  },
-                  "actions": {
-                    "create": {
-                      "enabled": true,
-                      "text": "Create"
-                    }
                   }
                 }
               }
@@ -340,12 +316,6 @@
                     "creationMode": {
                       "name": "NewPage",
                       "createAtEnd": true
-                    }
-                  },
-                  "actions": {
-                    "create": {
-                      "enabled": true,
-                      "text": "Create"
                     }
                   }
                 }
