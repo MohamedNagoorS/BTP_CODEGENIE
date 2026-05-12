@@ -1,4 +1,4 @@
-using J62AssetService from '../../../../srv/service';
+using J62AssetService from '../../../srv/service';
 
 annotate J62AssetService.AssetMaster with @(
   UI.LineItem : [
