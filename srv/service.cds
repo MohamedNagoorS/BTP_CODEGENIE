@@ -118,23 +118,5 @@ service J62AssetService @(path: '/odata/v4/J62AssetService') {
     *
   };
 
-  annotate AssetMaster with @Capabilities.InsertRestrictions: { Insertable: true };
-  annotate AssetMaster with @Capabilities.UpdateRestrictions: { Updatable: true };
-  annotate AssetMaster with @Capabilities.DeleteRestrictions: { Deletable: true };
 
-  annotate PurchaseRequisition with @Capabilities.InsertRestrictions: { Insertable: true };
-  annotate PurchaseRequisition with @Capabilities.UpdateRestrictions: { Updatable: true };
-  annotate PurchaseRequisition with @Capabilities.DeleteRestrictions: { Deletable: true };
-
-  annotate PurchaseOrder with @Capabilities.InsertRestrictions: { Insertable: true };
-  annotate PurchaseOrder with @Capabilities.UpdateRestrictions: { Updatable: true };
-  annotate PurchaseOrder with @Capabilities.DeleteRestrictions: { Deletable: true };
-
-  annotate GoodsReceipt with @Capabilities.InsertRestrictions: { Insertable: true };
-  annotate GoodsReceipt with @Capabilities.UpdateRestrictions: { Updatable: true };
-  annotate GoodsReceipt with @Capabilities.DeleteRestrictions: { Deletable: true };
-
-  annotate Invoice with @Capabilities.InsertRestrictions: { Insertable: true };
-  annotate Invoice with @Capabilities.UpdateRestrictions: { Updatable: true };
-  annotate Invoice with @Capabilities.DeleteRestrictions: { Deletable: true };
 }
